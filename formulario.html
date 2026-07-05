@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário - METRON</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">METRON</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="formulario.html" style="color: #0d6efd; font-weight: bold;">Questionário</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="#contato">Contato</a>
+        </nav>
+        <a href="formulario.html" class="btn-header">Começar Agora</a>
+    </header>
+
+    <main class="questionario-container">
+        <h1 class="titulo-questionario">Descubra seu IEE</h1>
+        <p style="text-align: center; margin-bottom: 40px; color: #d9d9d9;">
+            Responda às seções abaixo com sinceridade para calcular seu Índice de Equilíbrio Estudantil.
+        </p>
+        
+        <form id="form-iee" class="form-estilizado">
+            
+            <fieldset>
+                <legend><i class="fa-solid fa-bed"></i> 1. Sono</legend>
+                <input type="number" id="sono" placeholder="Horas de sono por noite (Ex: 8)" min="0" max="24" required>
+            </fieldset>
+
+            <fieldset>
+                <legend><i class="fa-solid fa-book"></i> 2. Estudos (Fora de sala)</legend>
+                <input type="number" id="estudos" placeholder="Horas de estudo diário" min="0" max="24" required>
+            </fieldset>
+
+            <fieldset>
+                <legend><i class="fa-solid fa-dumbbell"></i> 3. Atividade Física</legend>
+                <input type="number" id="fisica" placeholder="Quantos dias na semana? (0 a 7)" min="0" max="7" required>
+            </fieldset>
+
+            <fieldset>
+                <legend><i class="fa-solid fa-mobile-screen"></i> 4. Uso de Tecnologia</legend>
+                <input type="number" id="tec_rec" placeholder="Horas de uso recreativo (Ex: Redes sociais/Jogos)" min="0" max="24" required>
+                
+                <select id="tec_dormir" required>
+                    <option value="" disabled selected>Usa o celular antes de dormir?</option>
+                    <option value="0">Nunca</option>
+                    <option value="5">Raramente</option>
+                    <option value="10">Às vezes</option>
+                    <option value="15">Frequentemente</option>
+                    <option value="20">Sempre</option>
+                </select>
+
+                <select id="tec_interrupcao" required>
+                    <option value="" disabled selected>O celular interrompe seus estudos?</option>
+                    <option value="0">Nunca</option>
+                    <option value="20">Raramente</option>
+                    <option value="35">Às vezes</option>
+                    <option value="50">Frequentemente / Sempre</option>
+                </select>
+            </fieldset>
+
+            <fieldset>
+                <legend><i class="fa-regular fa-calendar-check"></i> 5. Organização</legend>
+                <select id="org1" required><option value="" disabled selected>Planejo minha semana?</option><option value="1">Nunca</option><option value="2">Raramente</option><option value="3">Às vezes</option><option value="4">Frequentemente</option><option value="5">Sempre</option></select>
+                <select id="org2" required><option value="" disabled selected>Entrego atividades no prazo?</option><option value="1">Nunca</option><option value="2">Raramente</option><option value="3">Às vezes</option><option value="4">Frequentemente</option><option value="5">Sempre</option></select>
+                <select id="org3" required><option value="" disabled selected>Tenho uma rotina prioritária definida?</option><option value="1">Nunca</option><option value="2">Raramente</option><option value="3">Às vezes</option><option value="4">Frequentemente</option><option value="5">Sempre</option></select>
+                <select id="org4" required><option value="" disabled selected>Confio no uso de agenda/calendário?</option><option value="1">Nunca</option><option value="2">Raramente</option><option value="3">Às vezes</option><option value="4">Frequentemente</option><option value="5">Sempre</option></select>
+            </fieldset>
+
+            <fieldset>
+                <legend><i class="fa-solid fa-brain"></i> 6. Bem-Estar e Concentração</legend>
+                <select id="bem1" required><option value="" disabled selected>Sinto-me cansado durante o dia?</option><option value="5">Nunca</option><option value="4">Raramente</option><option value="3">Às vezes</option><option value="2">Frequentemente</option><option value="1">Sempre</option></select>
+                <select id="bem2" required><option value="" disabled selected>Tenho dificuldade de concentração?</option><option value="5">Nunca</option><option value="4">Raramente</option><option value="3">Às vezes</option><option value="2">Frequentemente</option><option value="1">Sempre</option></select>
+                <select id="bem3" required><option value="" disabled selected>Procrastino tarefas importantes?</option><option value="5">Nunca</option><option value="4">Raramente</option><option value="3">Às vezes</option><option value="2">Frequentemente</option><option value="1">Sempre</option></select>
+                <select id="bem4" required><option value="" disabled selected>Sinto que minha rotina está sem controle?</option><option value="5">Nunca</option><option value="4">Raramente</option><option value="3">Às vezes</option><option value="2">Frequentemente</option><option value="1">Sempre</option></select>
+            </fieldset>
+            
+            <button type="button" onclick="calcularIEE()">Calcular IEE</button>
+        </form>
+
+        <div id="resultado-iee" class="resultado-box" style="display: none;">
+            <h2>Seu IEE é: <span id="valor-iee">0</span></h2>
+            <p id="texto-interpretacao" style="margin-top:10px; font-size:18px; font-weight:bold;"></p>
+        </div>
+    </main>
+    <footer id="contato">
+        <div class="footer-box">
+            <div class="box-header">
+                <i class="fa-solid fa-location-dot"></i>
+                <h3>Local</h3>
+            </div>
+            <p class="texto-destaque">Universidade Federal de Campina Grande</p>
+            <p>ETSC- Escola Técnica de Saúde de Cajazeiras</p>
+        </div>
+
+        <div class="footer-box">
+            <div class="box-header">
+                <i class="fa-solid fa-user-group"></i>
+                <h3>Equipe</h3>
+            </div>
+            <p>Emmanuel Lucas</p>
+            <p>Heitor Cartaxo</p>
+            <p>Luiz Miguel</p>
+            <p>Maria Eduarda</p>
+        </div>
+
+        <div class="footer-box">
+            <div class="box-header">
+                <i class="fa-solid fa-phone"></i>
+                <h3>Contato</h3>
+            </div>
+            <p>metron@etsc.edu.br</p>
+        </div>
+    </footer>
+<script src="js/carcularIEE.js"></script>
+</body>
+</html>

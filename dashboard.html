@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - METRON</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+   <header>
+        <div class="logo">METRON</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="formulario.html">Questionário</a>
+            <a href="dashboard.html" style="color: #0d6efd; font-weight: bold;">Dashboard</a>
+            <a href="#contato">Contato</a>
+        </nav>
+       <a href="formulario.html" class="btn-header">Começar Agora</a>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Seu Painel de Resultados</h1>
+            <p>Acompanhe o seu Índice de Equilíbrio Estudantil (IEE) em tempo real.</p>
+        </div>
+        
+        <div class="dashboard-grid">
+            
+            <div class="dash-card gauge-card">
+                <h3><i class="fa-solid fa-gauge-high"></i> Seu IEE Atual</h3>
+                
+                <div class="chart-container">
+                    <canvas id="velocimetroChart"></canvas>
+                    <div class="valor-central">
+                        <span id="valor-iee-display">75</span>
+                        <small id="status-texto">Equilíbrio Moderado</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dash-card detalhes-card">
+                <h3><i class="fa-solid fa-list-check"></i> Escala de Avaliação</h3>
+                <ul class="escala-lista">
+                    <li><span class="cor-indicador" style="background: #ff4d4d;"></span> <strong>0 - 30:</strong> Desequilíbrio Acentuado</li>
+                    <li><span class="cor-indicador" style="background: #ffcc00;"></span> <strong>31 - 60:</strong> Atenção</li>
+                    <li><span class="cor-indicador" style="background: #4da3ff;"></span> <strong>61 - 80:</strong> Equilíbrio Moderado</li>
+                    <li><span class="cor-indicador" style="background: #00cc66;"></span> <strong>81 - 100:</strong> Equilíbrio Saudável</li>
+                </ul>
+                <div class="alerta-box">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <p><strong>Dica:</strong> Seus maiores gargalos atuais são <em>Qualidade do Sono</em> e <em>Uso de Telas antes de dormir</em>. Tente reduzir o celular 30 min antes de deitar.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer id="contato">
+        <div class="footer-box">
+            <div class="box-header">
+                <i class="fa-solid fa-location-dot"></i>
+                <h3>Local</h3>
+            </div>
+            <p class="texto-destaque">Universidade Federal de Campina Grande</p>
+            <p>ETSC- Escola Técnica de Saúde de Cajazeiras</p>
+        </div>
+
+        <div class="footer-box">
+            <div class="box-header">
+                <i class="fa-solid fa-user-group"></i>
+                <h3>Equipe</h3>
+            </div>
+            <p>Emmanuel Lucas</p>
+            <p>Heitor Cartaxo</p>
+            <p>Luiz Miguel</p>
+            <p>Maria Eduarda</p>
+        </div>
+
+        <div class="footer-box">
+            <div class="box-header">
+                <i class="fa-solid fa-phone"></i>
+                <h3>Contato</h3>
+            </div>
+            <p>metron@etsc.edu.br</p>
+        </div>
+    
+    </footer>
+
+ <script src="js/dashboard.js"></script>
+
+</body>
+</html>
