@@ -164,4 +164,5 @@ function calcularIEE() {
     localStorage.setItem("pontuacaoIEE", iee);
     localStorage.setItem("statusIEE", resultado.texto);
     localStorage.setItem("corIEE", resultado.cor);
+    localStorage.setItem("horasSono", sono);
 }
