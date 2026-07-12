@@ -15,34 +15,79 @@ function limitar(valor, minimo, maximo) {
 }
 
 function pontuarSono(horas) {
-    if (horas >= 7 && horas <= 9) return 100;
-    if (horas >= 6 && horas < 7) return 80;
-    if (horas > 9 && horas <= 10) return 80;
-    if (horas >= 5 && horas < 6) return 60;
-    if (horas > 10 && horas <= 11) return 60;
-    if (horas >= 4 && horas < 5) return 40;
-    if (horas > 11 && horas <= 12) return 40;
+    if (horas < 0 || horas > 24) {
+        alert("Erro! Informe novamente seu tempo de sono.");
+        return NaN;
+    }
+
+    if (horas >= 7 && horas <= 8) return 100;
+    if (horas > 8 && horas <= 9) return 95;
+    if (horas >= 6 && horas < 7) return 90;
+    if (horas > 9 && horas < 10) return 80;
+    if (horas >= 5 && horas < 6) return 75;
+    if (horas >= 4 && horas < 5) return 50;
+
     return 20;
 }
 
+
 function pontuarEstudos(horas) {
+    if (horas < 0 || horas > 24) {
+        alert("Erro! Informe novamente seu tempo diário de estudos.");
+        return NaN;
+    }
+
+    if (horas >= 0 && horas < 1) return 0;
+    if (horas >= 1 && horas < 2) return 60;
     if (horas >= 2 && horas <= 4) return 100;
-    if (horas >= 1 && horas < 2) return 80;
-    if (horas > 4 && horas <= 6) return 85;
-    if (horas > 6 && horas <= 8) return 70;
-    if (horas > 0 && horas < 1) return 50;
-    if (horas === 0) return 30;
+    if (horas > 4 && horas < 5) return 90;
+    if (horas >= 5 && horas < 6) return 70;
     return 50;
 }
 
-function pontuarTecnologia(horasRecreativas, usoAntesDormir, interrupcaoEstudos) {
-    const pontosHoras = limitar(100 - (horasRecreativas * 10), 0, 100);
-    const pontosDormir = limitar(100 - (usoAntesDormir * 5), 0, 100);
-    const pontosInterrupcao = limitar(100 - (interrupcaoEstudos * 2), 0, 100);
+function pontuarFisica(dias) {
+    if (dias < 0 || dias > 7) {
+        alert("Erro! Informe um número de 0 a 7 para atividade física.");
+        return NaN;
+    }
 
-    return (pontosHoras + pontosDormir + pontosInterrupcao) / 3;
+    if (dias === 0) return 0;
+    if (dias === 1) return 25;
+    if (dias === 2) return 50;
+    if (dias === 3) return 75;
+    if (dias === 4) return 90;
+    if (dias === 5) return 100;
+    if (dias === 6) return 100;
+    if (dias === 7) return 95;
 }
 
+function penalizarUsoRecreativo(horas) {
+    if (horas < 0 || horas > 24) {
+        alert("Erro! Informe novamente seu tempo de uso recreativo.");
+        return NaN;
+    }
+
+    if (horas >= 0 && horas < 3) return 0;
+    if (horas >= 3 && horas < 4) return 5;
+    if (horas >= 4 && horas < 5) return 10;
+    if (horas >= 5 && horas < 6) return 20;
+    
+    return 30;
+}
+
+function pontuarTecnologia(horasRecreativas, usoAntesDormir, interrupcaoEstudos) {
+    const penalizacaoRecreativo = penalizarUsoRecreativo(horasRecreativas);
+    const penalizacaoDormir = usoAntesDormir;
+    const penalizacaoInterrupcao = interrupcaoEstudos;
+
+    const notaTecnologia = 100 - (
+        penalizacaoRecreativo +
+        penalizacaoDormir +
+        penalizacaoInterrupcao
+    );
+
+    return limitar(notaTecnologia, 0, 100);
+}
 function pontuarEscalaLikert(ids) {
     let soma = 0;
 
@@ -114,7 +159,7 @@ function calcularIEE() {
 
     const pontosSono = pontuarSono(sono);
     const pontosEstudos = pontuarEstudos(estudos);
-    const pontosFisica = limitar((fisica / 7) * 100, 0, 100);
+    const pontosFisica = pontuarFisica(fisica);
     const pontosTecnologia = pontuarTecnologia(tecRec, tecDormir, tecInterrupcao);
 
     const pontosOrganizacao = pontuarEscalaLikert([
@@ -132,12 +177,14 @@ function calcularIEE() {
     ]);
 
     const iee = Math.round(
-        (pontosSono * 0.20) +
-        (pontosEstudos * 0.15) +
-        (pontosFisica * 0.15) +
-        (pontosTecnologia * 0.20) +
-        (pontosOrganizacao * 0.15) +
-        (pontosBemEstar * 0.15)
+    (
+        pontosSono +
+        pontosTecnologia +
+        pontosOrganizacao +
+        pontosEstudos +
+        pontosFisica +
+        pontosBemEstar
+    ) / 6
     );
 
     const resultado = interpretarIEE(iee);
